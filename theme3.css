@@ -1,0 +1,15 @@
+:root {
+  --textColor: hsl(52, 100%, 62%);
+  --btnColor: hsl(52, 100%, 62%);
+  --mainBg: hsl(268, 75%, 9%);
+  --secBg: hsl(268, 71%, 12%);
+  --btnBg: hsl(268, 47%, 21%);
+  --btnDelBg: hsl(281, 89%, 26%);
+  --btnDelColor: hsl(0, 0%, 100%);
+  --btnDelShadow: hsl(290, 70%, 36%);
+  --btnShadow: hsl(285, 91%, 52%);
+  --equal_toggler_Bg: hsl(176, 100%, 44%);
+  --equalShadowBg: hsl(177, 92%, 70%);
+  --screenBg: var(--secBg);
+  --equalColor :hsl(198, 20%, 13%);
+}
