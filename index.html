@@ -1,462 +1,516 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- displays site properly based on user's device -->
 
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="32x32"
-      href="./images/favicon-32x32.png"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=League Spartan"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- displays site properly based on user's device -->
 
-    <title>Frontend Mentor | Calculator app</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=League Spartan" />
 
-    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-    <link id="theme" rel="stylesheet" href="theme1.css" />
+  <title>Frontend Mentor | Calculator app</title>
 
-    <style>
-      @font-face {
-        font-family: "League Spartan";
-        src: url("https://fonts.google.com/specimen/League Spartan");
-      }
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <link id="theme" rel="stylesheet" href="theme1.css" />
 
-      * {
-        font-family: League Spartan;
-        margin: 0;
-        padding: 0;
-        font-weight: 700;
-        box-sizing: border-box;
-        cursor: default;
-      }
-      /* - Very dark desaturated blue (main background): hsl(222, 26%, 31%) */
-      body {
-        background-color: var(--mainBg);
-      }
-      #main-contianer {
-        height: 100vh;
-        width: 100%;
-        max-width: 500px;
-        background-color: var(--mainBg);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin: auto;
-      }
-      #header {
-        height: 15vh;
-        width: 80%;
-        border: inherit;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        align-items: center;
-      }
+  <style>
+    @font-face {
+      font-family: "League Spartan";
+      src: url("https://fonts.google.com/specimen/League Spartan");
+    }
 
-      #name {
-        color: var(--textColor);
-        font-weight: 700;
-        font-size: 32px;
-      }
+    * {
+      font-family: League Spartan;
+      margin: 0;
+      padding: 0;
+      font-weight: 700;
+      box-sizing: border-box;
+      cursor: default;
+    }
+
+    /* - Very dark desaturated blue (main background): hsl(222, 26%, 31%) */
+    body {
+      background-color: var(--mainBg);
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #main-contianer {
+      height: 90vh;
+      max-height: 600px;
+      width: 90%;
+      max-width: 600px;
+      background-color: var(--mainBg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #header {
+      height: 15vh;
+      width: 80%;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #name {
+      color: var(--textColor);
+      font-weight: 700;
+      font-size: 32px;
+    }
+
+    #theme-toggler {
+      width: 33%;
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    #theme-toggler #title {
+      font-size: 12px;
+      margin-top: 10px;
+      color: var(--textColor);
+      font-variant: small-caps;
+    }
+
+    #theme-toggler #toggle-level {
+      width: 45px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: baseline;
+    }
+
+    #theme-toggler #toggle-level #toggle-number {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #toggle-level span {
+      font-size: 10px;
+      margin: 1px 1px;
+      color: var(--textColor);
+    }
+
+    #toggle-level span:first-child {
+      grid-area: one;
+    }
+
+    #toggle-level span:nth-child(2) {
+      grid-area: two;
+    }
+
+    #toggle-level span:nth-child(3) {
+      grid-area: three;
+    }
+
+    #toggle-level #toggle-bar {
+      grid-area: bar;
+      width: 100%;
+      background-color: var(--secBg);
+      border-radius: 20px;
+      height: 15px;
+      color: blue;
+      justify-self: start;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      padding: 0 4px;
+    }
+
+    #ball {
+      display: block;
+      height: 11px;
+      width: calc(10px + (1px / 2));
+      background-color: var(--equal_toggler_Bg);
+      border-radius: 50px;
+    }
+
+    #calc-cont {
+      height: 80vh;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      /* align-items: stretch; */
+      /* justify-content: space-around; */
+    }
+
+    #screen {
+      width: 100%;
+      background-color: var(--screenBg);
+      color: var(--textColor);
+      margin: 10px auto;
+      height: 18%;
+      max-height: 70px;
+      font-weight: 700;
+      font-size: 32px;
+      text-align: right;
+      display: flex;
+      justify-content: right;
+      padding: 0 15px;
+      align-items: center;
+      border-radius: 5px;
+    }
+
+    #calc-body {
+      margin: 10px auto;
+      width: 100%;
+      height: 100%;
+      background-color: var(--secBg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #btn-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      align-items: center;
+      /* height: 0%; */
+    }
+
+    #function-btns,
+    #number-btns {
+      display: grid;
+      width: 90%;
+      place-content: center;
+      gap: 10px;
+      height: 100%;
+    }
+
+    #number-btns {
+      grid-template-columns: repeat(4, calc(calc(100% / 4) - 10px));
+    }
+
+    #function-btns {
+      grid-template-columns: repeat(2, calc(calc(100% / 2) - 10px));
+    }
+
+    #number-btns .btn,
+    #function-btns .btn {
+      background-color: var(--btnBg);
+      height: 8vh;
+      max-height: 60px;
+      border-radius: 5px;
+      border: 0;
+      color: var(--btnColor);
+      box-shadow: 0px 1px 2px var(--btnShadow);
+      cursor: pointer;
+    }
+
+    #number-btns .btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    #function-btns .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--btnDelColor);
+    }
+
+    #function-btns .btn:first-child {
+      background-color: var(--btnDelBg);
+      box-shadow: 0px 2px 2px var(--btnDelShadow);
+    }
+
+    #function-btns .btn:last-child {
+      background-color: var(--equal_toggler_Bg);
+      box-shadow: 0px 2px 2px var(--equalShadowBg);
+      color: var(--equalColor);
+    }
+
+    .btn#delete-btn {
+      background-color: var(--btnDelBg);
+      box-shadow: 0px 2px 2px var(--btnDelShadow);
+      font-size: 15px;
+      color: var(--btnDelColor);
+    }
+
+    @media screen and (min-width: 375px) {
       #theme-toggler {
-        width: 33%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        align-items: center;
-      }
-      #theme-toggler #title {
-        font-size: 12px;
-        margin-top: 10px;
-        color: var(--textColor);
-        font-variant: small-caps;
-      }
-      #theme-toggler #toggle-level {
-        width: 45px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: baseline;
-      }
-      #theme-toggler #toggle-level #toggle-number {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 6px;
-      }
-      #toggle-level span {
-        font-size: 10px;
-        margin: 1px 1px;
-        color: var(--textColor);
+        width: 30%;
       }
 
-      #toggle-level span:first-child {
-        grid-area: one;
-      }
-      #toggle-level span:nth-child(2) {
-        grid-area: two;
-      }
-
-      #toggle-level span:nth-child(3) {
-        grid-area: three;
-      }
-
-      #toggle-level #toggle-bar {
-        grid-area: bar;
-        width: 100%;
-        background-color: var(--secBg);
-        border-radius: 20px;
-        height: 15px;
-        color: blue;
-        justify-self: start;
-        display: flex;
-        justify-content: left;
-        align-items: center;
-        padding: 0 4px;
-      }
-
-      #ball {
-        display: block;
-        height: 11px;
-        width: calc(10px + (1px / 2));
-        background-color: var(--equal_toggler_Bg);
-        border-radius: 50px;
-      }
-      #calc-cont {
-        height: 80vh;
-        width: 80%;
-        border: inherit;
-        /* margin: 0 auto; */
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        justify-content: space-around;
-      }
-      #screen {
-        width: 100%;
-        background-color: var(--screenBg);
-        border: inherit;
-        color: var(--textColor);
-        margin: auto;
-        height: 18%;
-        max-height: 70px;
-        font-weight: 700;
-        font-size: 32px;
-        text-align: right;
-        display: flex;
-        justify-content: right;
-        padding: 0 10px;
-        align-items: center;
-        border-radius: 5px;
-      }
-      #calc-body {
-        margin: auto;
-        width: 100%;
-        padding: 10px 0;
-        height: 70%;
-        background-color: var(--secBg);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
       #btn-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: auto;
-        width: 100%;
-        align-items: center;
-        gap: 10px;
+        gap: 20px;
       }
+
       #function-btns,
       #number-btns {
-        display: grid;
-        width: 90%;
-
-        place-content: center;
-        gap: 10px;
+        gap: 15px;
       }
+
       #number-btns {
-        grid-template-columns: repeat(4, calc(calc(100% / 4) - 10px));
+        grid-template-columns: repeat(4, calc(calc(100% / 4) - 15px));
       }
 
       #function-btns {
-        grid-template-columns: repeat(2, calc(calc(100% / 2) - 10px));
+        grid-template-columns: repeat(2, calc(calc(100% / 2) - 15px));
       }
-      #number-btns .btn,
-      #function-btns .btn {
-        background-color: var(--btnBg);
-        height: 9vh;
-        max-height: 50px;
-        border-radius: 5px;
-        border: 0;
-        color: var(--btnColor);
-        box-shadow: 0px 1px 2px var(--btnShadow);
-      }
+
       #number-btns .btn {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 32px;
         font-weight: 700;
-      }
-      #function-btns .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 15px;
-        font-weight: 700;
-        color: var(--btnDelColor);
-      }
-      #function-btns .btn:first-child {
-        background-color: var(--btnDelBg);
-        box-shadow: 0px 2px 2px var(--btnDelShadow);
-      }
-      #function-btns .btn:last-child {
-        background-color: var(--equal_toggler_Bg);
-        box-shadow: 0px 2px 2px var(--equalShadowBg);
-        color: var(--equalColor);
-      }
-      .btn#delete-btn {
-        background-color: var(--btnDelBg);
-        box-shadow: 0px 2px 2px var(--btnDelShadow);
-        font-size: 15px;
-        color: var(--btnDelColor);
       }
 
-      @media screen and (min-width: 375px) {
-        #theme-toggler {
-          width: 30%;
-        }
-        #btn-container {
-          gap: 20px;
-        }
-        #function-btns,
-        #number-btns {
-          gap: 15px;
-        }
-        #number-btns {
-          grid-template-columns: repeat(4, calc(calc(100% / 4) - 15px));
-        }
-        #function-btns {
-          grid-template-columns: repeat(2, calc(calc(100% / 2) - 15px));
-        }
-        #number-btns .btn {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          font-weight: 700;
-        }
-        #function-btns .btn:last-child {
-          font-size: 32px;
-        }
+      #function-btns .btn:last-child {
+        font-size: 32px;
       }
-    </style>
-  </head>
-  <body>
-    <!-- <div class="attribution">
+    }
+  </style>
+</head>
+
+<body>
+  <!-- <div class="attribution">
        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.  -->
-    <!-- Coded by <a href="https://www.linkedin.com/in/javascriptenthusiat">Abraham Samuel</a>.
+  <!-- Coded by <a href="https://www.linkedin.com/in/javascriptenthusiat">Abraham Samuel</a>.
     </div> -->
 
-    <div id="main-contianer">
-      <div id="header">
-        <span id="name">calc</span>
-        <span id="theme-toggler">
-          <span id="title">theme</span>
-          <span id="toggle-level">
-            <span id="toggle-number">
-              <span>1</span>
-              <span>2</span>
-              <span>3</span>
-            </span>
-            <span id="toggle-bar">
-              <span id="ball"></span>
-            </span>
+  <div id="main-contianer">
+    <div id="header">
+      <span id="name">calc</span>
+      <span id="theme-toggler">
+        <span id="title">theme</span>
+        <span id="toggle-level">
+          <span id="toggle-number">
+            <span>1</span>
+            <span>2</span>
+            <span>3</span>
+          </span>
+          <span id="toggle-bar">
+            <span id="ball"></span>
           </span>
         </span>
-      </div>
-      <div id="calc-cont">
-        <input type="text" id="screen" required disabled />
+      </span>
+    </div>
+    <div id="calc-cont">
+      <input type="text" id="screen" required disabled />
 
-        <div id="calc-body">
-          <div id="btn-container">
-            <div id="number-btns">
-              <button class="btn inp-btn" value="7">7</button>
-              <button class="btn inp-btn" value="8">8</button>
-              <button class="btn inp-btn" value="9">9</button>
-              <button class="btn oparator" id="delete-btn">DEL</button>
-              <button class="btn inp-btn" value="4">4</button>
-              <button class="btn inp-btn" value="5">5</button>
-              <button class="btn inp-btn" value="6">6</button>
-              <button class="btn oparator" value="+">+</button>
-              <button class="btn inp-btn" value="3">3</button>
-              <button class="btn inp-btn" value="2">2</button>
-              <button class="btn inp-btn" value="1">1</button>
-              <button class="btn oparator" value="-">-</button>
-              <button class="btn oparator" value="." b>.</button>
-              <button class="btn inp-btn" value="0">0</button>
-              <button class="btn oparator" value="/">/</button>
-              <button class="btn oparator" value="*">x</button>
-            </div>
-            <div id="function-btns">
-              <button class="btn" id="reset">RESET</button>
-              <button class="btn oparator" id="equal-btn">=</button>
-            </div>
+      <div id="calc-body">
+        <div id="btn-container">
+          <div id="number-btns">
+            <button class="btn inp-btn" value="7">7</button>
+            <button class="btn inp-btn" value="8">8</button>
+            <button class="btn inp-btn" value="9">9</button>
+            <button class="btn oparator" id="delete-btn">DEL</button>
+            <button class="btn inp-btn" value="4">4</button>
+            <button class="btn inp-btn" value="5">5</button>
+            <button class="btn inp-btn" value="6">6</button>
+            <button class="btn oparator" value="+">+</button>
+            <button class="btn inp-btn" value="3">3</button>
+            <button class="btn inp-btn" value="2">2</button>
+            <button class="btn inp-btn" value="1">1</button>
+            <button class="btn oparator" value="-">-</button>
+            <button class="btn oparator" value="." b>.</button>
+            <button class="btn inp-btn" value="0">0</button>
+            <button class="btn oparator" value="/">/</button>
+            <button class="btn oparator" value="*">x</button>
+          </div>
+          <div id="function-btns">
+            <button class="btn" id="reset">RESET</button>
+            <button class="btn oparator" id="equal-btn">=</button>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-    <script>
-      const theme = Number(localStorage.getItem("themeNum"))
-        ? Number(localStorage.getItem("themeNum"))
-        : 0;
-      window.addEventListener("load", () => {
-        setTheme(theme);
-      });
-      var styleTag = document.querySelector("#theme");
-      var togglerNum = document.querySelectorAll("#toggle-number span");
-      var toggleBar = document.querySelector("#toggle-bar");
-      var input = document.querySelector("input");
-      var reset = document.querySelector("#reset");
-      var del = document.querySelector("#delete-btn");
-      var equal = document.querySelector("#equal-btn");
-      var currentThemeNum = theme ? theme : 0;
+  <script>
+    const theme = Number( localStorage.getItem( "themeNum" ) )
+      ? Number( localStorage.getItem( "themeNum" ) )
+      : 0;
+    window.addEventListener( "load", () =>
+    {
+      setTheme( theme );
+    } );
+    var styleTag = document.querySelector( "#theme" );
+    var togglerNum = document.querySelectorAll( "#toggle-number span" );
+    var toggleBar = document.querySelector( "#toggle-bar" );
+    var input = document.querySelector( "input" );
+    var reset = document.querySelector( "#reset" );
+    var del = document.querySelector( "#delete-btn" );
+    var equal = document.querySelector( "#equal-btn" );
+    var currentThemeNum = theme ? theme : 0;
 
-      const btns = document.querySelectorAll(".inp-btn");
-      const oparators = document.querySelectorAll(".oparator");
-      btns.forEach((btn) => {
-        btn.addEventListener("click", (e) => {
-          const val = Number(e.target.value);
-          input.value += val;
-        });
-      });
+    const btns = document.querySelectorAll( ".inp-btn" );
+    const oparators = document.querySelectorAll( ".oparator" );
+    btns.forEach( ( btn ) =>
+    {
+      btn.addEventListener( "click", ( e ) =>
+      {
+        const val = Number( e.target.value );
+        input.value += val;
+      } );
+    } );
 
-      const calc = (inp, callback) => {
-        if (inp.includes("+")) {
-          var num1 = Number(inp.splice(0, inp.indexOf("+")).join(""));
-          var num2 = Number(
-            inp.splice(inp.indexOf("+") + 1, inp.length).join("")
-          );
-          input.value = num2 + num1;
-        } else if (
-          inp.includes("-") &&
-          !inp.includes("*") &&
-          !inp.includes("/")
-        ) {
-          var { num1, num2, prev } = oprandsHandler(inp, "-");
-          input.value = prev ? prev + (num1 + num2) : num1 - num2;
-        } else if (inp.includes("/")) {
-          var { num1, num2, prev } = oprandsHandler(inp, "/");
-          input.value = prev ? prev + num1 / num2 : num1 / num2;
-        } else if (inp.includes("*")) {
-          var { num1, num2, prev } = oprandsHandler(inp, "*");
-          input.value = prev ? prev + num1 * num2 : num1 * num2;
-        } else {
+    const calc = ( inp, callback ) =>
+    {
+      if ( inp.includes( "+" ) )
+      {
+        var num1 = Number( inp.splice( 0, inp.indexOf( "+" ) ).join( "" ) );
+        var num2 = Number(
+          inp.splice( inp.indexOf( "+" ) + 1, inp.length ).join( "" )
+        );
+        input.value = num2 + num1;
+      } else if (
+        inp.includes( "-" ) &&
+        !inp.includes( "*" ) &&
+        !inp.includes( "/" )
+      )
+      {
+        var { num1, num2, prev } = oprandsHandler( inp, "-" );
+        input.value = prev ? prev + ( num1 + num2 ) : num1 - num2;
+      } else if ( inp.includes( "/" ) )
+      {
+        var { num1, num2, prev } = oprandsHandler( inp, "/" );
+        input.value = prev ? prev + num1 / num2 : num1 / num2;
+      } else if ( inp.includes( "*" ) )
+      {
+        var { num1, num2, prev } = oprandsHandler( inp, "*" );
+        input.value = prev ? prev + num1 * num2 : num1 * num2;
+      } else
+      {
+        return;
+      }
+      callback?.();
+    };
+
+    oparators.forEach( ( oparator ) =>
+    {
+      oparator.addEventListener( "click", ( e ) =>
+      {
+        const val = input.value;
+        var list = [ "+", "-", "/", "*", "." ];
+        const res = list.filter( ( oprands ) =>
+        {
+          if ( input.value.endsWith( oprands ) )
+          {
+            return oprands;
+          }
+        } );
+        if ( list.includes( res.toString() ) )
+        {
+          return;
+        } else if ( e.target.value !== "-" && input.value == "" )
+        {
           return;
         }
-        callback?.();
-      };
 
-      oparators.forEach((oparator) => {
-        oparator.addEventListener("click", (e) => {
-          const val = input.value;
-          var list = ["+", "-", "/", "*", "."];
-          const res = list.filter((oprands) => {
-            if (input.value.endsWith(oprands)) {
-              return oprands;
-            }
-          });
-          if (list.includes(res.toString())) {
-            return;
-          } else if (e.target.value !== "-" && input.value == "") {
-            return;
+        list.forEach( ( oprands ) =>
+        {
+          if ( input.value.includes( oprands ) )
+          {
+            calc( [ ...input.value ], () =>
+            {
+              input.value = input.value;
+            } );
           }
+        } );
+        input.value = input.value + e.target.value;
+      } );
+    } );
+    reset.addEventListener( "click", () =>
+    {
+      input.value = "";
+    } );
 
-          list.forEach((oprands) => {
-            if (input.value.includes(oprands)) {
-              calc([...input.value], () => {
-                input.value = input.value;
-              });
-            }
-          });
-          input.value = input.value + e.target.value;
-        });
-      });
-      reset.addEventListener("click", () => {
-        input.value = "";
-      });
+    del.addEventListener( "click", () =>
+    {
+      input.value = input.value.slice( 0, input.value.length - 1 );
+    } );
 
-      del.addEventListener("click", () => {
-        input.value = input.value.slice(0, input.value.length - 1);
-      });
+    const oprandsHandler = ( arr, sign ) =>
+    {
+      // console.log(arr);
+      if ( arr[ 0 ].startsWith( "-" ) )
+      {
+        var next = [ ...arr ].splice( 1, arr.length );
+        return {
+          prev: [ ...arr ].splice( 0, 1 ),
+          num1: Number( next.splice( 0, next.indexOf( sign ) ).join( "" ) ),
+          num2: Number(
+            next.splice( next.indexOf( sign ) + 1, next.length ).join( "" )
+          ),
+        };
+      } else
+      {
+        var next = [ ...arr ].splice( 0, arr.length );
+        return {
+          num1: Number( next.splice( 0, next.indexOf( sign ) ).join( "" ) ),
+          num2: Number(
+            next.splice( next.indexOf( sign ) + 1, next.length ).join( "" )
+          ),
+        };
+      }
+    };
 
-      const oprandsHandler = (arr, sign) => {
-        // console.log(arr);
-        if (arr[0].startsWith("-")) {
-          var next = [...arr].splice(1, arr.length);
-          return {
-            prev: [...arr].splice(0, 1),
-            num1: Number(next.splice(0, next.indexOf(sign)).join("")),
-            num2: Number(
-              next.splice(next.indexOf(sign) + 1, next.length).join("")
-            ),
-          };
-        } else {
-          var next = [...arr].splice(0, arr.length);
-          return {
-            num1: Number(next.splice(0, next.indexOf(sign)).join("")),
-            num2: Number(
-              next.splice(next.indexOf(sign) + 1, next.length).join("")
-            ),
-          };
-        }
-      };
+    equal.addEventListener( "click", () =>
+    {
+      calc( [ ...input.value ] );
+    } );
 
-      equal.addEventListener("click", () => {
-        calc([...input.value]);
-      });
+    const incrementThemeNum = () =>
+    {
+      ( () =>
+      {
+        currentThemeNum < 3 ? ( currentThemeNum += 1 ) : ( currentThemeNum = 1 );
+      } )();
+      return currentThemeNum;
+    };
+    const setTheme = ( currentThemeNum ) =>
+    {
+      if ( currentThemeNum === 1 )
+      {
+        toggleBar.style.justifyContent = "left";
+        styleTag.href = "theme1.css";
+      } else if ( currentThemeNum === 2 )
+      {
+        toggleBar.style.justifyContent = "center";
+        styleTag.href = "theme2.css";
+      } else if ( currentThemeNum === 3 )
+      {
+        toggleBar.style.justifyContent = "right";
+        styleTag.href = "theme3.css";
+      }
+    };
 
-      const incrementThemeNum = () => {
-        (() => {
-          currentThemeNum < 3 ? (currentThemeNum += 1) : (currentThemeNum = 1);
-        })();
-        return currentThemeNum;
-      };
-      const setTheme = (currentThemeNum) => {
-        if (currentThemeNum === 1) {
-          toggleBar.style.justifyContent = "left";
-          styleTag.href = "theme1.css";
-        } else if (currentThemeNum === 2) {
-          toggleBar.style.justifyContent = "center";
-          styleTag.href = "theme2.css";
-        } else if (currentThemeNum === 3) {
-          toggleBar.style.justifyContent = "right";
-          styleTag.href = "theme3.css";
-        }
-      };
+    togglerNum.forEach( ( toggler ) =>
+      toggler.addEventListener( "click", ( e ) =>
+      {
+        setTheme( Number( e.target.textContent ) );
+        currentThemeNum = Number( e.target.textContent );
+        localStorage.setItem( "themeNum", currentThemeNum );
+      } )
+    );
 
-      togglerNum.forEach((toggler) =>
-        toggler.addEventListener("click", (e) => {
-          setTheme(Number(e.target.textContent));
-          currentThemeNum = Number(e.target.textContent);
-          localStorage.setItem("themeNum", currentThemeNum);
-        })
-      );
+    toggleBar.addEventListener( "click", () =>
+    {
+      incrementThemeNum();
+      setTheme( currentThemeNum );
+      localStorage.setItem( "themeNum", currentThemeNum );
+    } );
+  </script>
+</body>
 
-      toggleBar.addEventListener("click", () => {
-        incrementThemeNum();
-        setTheme(currentThemeNum);
-        localStorage.setItem("themeNum", currentThemeNum);
-      });
-    </script>
-  </body>
 </html>
